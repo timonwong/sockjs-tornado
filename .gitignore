@@ -10,4 +10,5 @@ source/_static*
 source/_templates*
 make.bat
 venv
+.idea
 *.egg-info

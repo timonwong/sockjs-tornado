@@ -1,5 +1,5 @@
 machine:
-  python: 
+  python:
     version: 2.7.10
 
 test:
@@ -15,4 +15,3 @@ deployment:
       - python setup.py sdist bdist_wheel
       # Upload to self hosted PyPI through S3
       - s3pypi --region "${AWS_REGION}" --bucket "${AWS_S3_BUCKET}"
-
