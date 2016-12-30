@@ -28,7 +28,7 @@ def desc():
 
 distutils.core.setup(
     name='sockjs-tornado-meiqia',
-    version='2016.11.3',
+    version='2016.12.30',
     author='Serge S. Koval',
     author_email='serge.koval@gmail.com',
     packages=['sockjs', 'sockjs.tornado', 'sockjs.tornado.transports'],
