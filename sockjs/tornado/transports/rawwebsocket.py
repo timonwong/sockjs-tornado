@@ -53,6 +53,18 @@ class RawSession(session.BaseSession):
             self._heartbeat_timer.stop()
             self._heartbeat_timer = None
 
+    def stop_check_heartbeat(self):
+        """Stop active heartbeat check timer."""
+        if self._check_heartbeat_timer is not None:
+            self.server.io_loop.remove_timeout(self._check_heartbeat_timer)
+            self._check_heartbeat_timer = None
+
+    def remove_handler(self, handler):
+        super(RawSession, self).remove_handler(handler)
+
+        self.stop_heartbeat()
+        self.stop_check_heartbeat()
+
     def _heartbeat(self):
         if self.handler is not None:
             self.handler.ping(proto.HEARTBEAT)
@@ -93,7 +105,7 @@ class RawWebSocketTransport(websocket.SockJSWebSocketHandler, base.BaseTransport
         try:
             # Verify state failed, session is closed.
             self.session.start_heartbeat()
-        except:
+        except Exception:
             pass
 
     def on_pong(self, data):
